@@ -1,9 +1,9 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/auth.routes");
 const taskRoutes = require("./routes/task.routes");
+const connection = require("./config/db"); 
 
 dotenv.config();
 
@@ -14,11 +14,22 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
 
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
+app.get("/", (req, res) => {
+
+   res.status(200).send("Server running ! Health Check Done");
+});
+
+
+
+const PORT = process.env.PORT || 5000;
+
+
+app.listen(PORT, async () => {
+  try {
+    await connection; // Wait for the connection to be established
     console.log("MongoDB connected");
-    app.listen(process.env.PORT, () => {
-      console.log(`Server running on port ${process.env.PORT}`);
-    });
-  })
-  .catch((err) => console.log(err));
+    console.log(`Server running on port ${PORT}`);
+  } catch (err) {
+    console.log("DB connection failed:", err.message);
+  }
+});
