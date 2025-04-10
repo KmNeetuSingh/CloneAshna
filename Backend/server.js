@@ -3,7 +3,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/auth.routes");
 const taskRoutes = require("./routes/task.routes");
-const connection = require("./config/db"); 
+const connection = require("./config/db");
 
 dotenv.config();
 
@@ -14,22 +14,18 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
 
-app.get("/", (req, res) => {
-
-   res.status(200).send("Server running ! Health Check Done");
+app.get("/health", (req, res) => {
+   res.status(200).send("Server running! Health Check Done");
 });
-
-
 
 const PORT = process.env.PORT || 5000;
 
-
 app.listen(PORT, async () => {
   try {
-    await connection; // Wait for the connection to be established
-    console.log("MongoDB connected");
-    console.log(`Server running on port ${PORT}`);
+    await connection();
+    console.log("✅ MongoDB connected");
+    console.log(`🚀 Server running on port ${PORT}`);
   } catch (err) {
-    console.log("DB connection failed:", err.message);
+    console.log("❌ DB connection failed:", err.message);
   }
 });
