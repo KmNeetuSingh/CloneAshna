@@ -1,10 +1,10 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const User = require("../models/User.model");
 
 const router = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET || "Neetu@123";// fallback just in case
+const JWT_SECRET = process.env.JWT_SECRET || "Neetu@123"// fallback just in case
 
 // ✅ Register
 router.post("/register", async (req, res) => {
