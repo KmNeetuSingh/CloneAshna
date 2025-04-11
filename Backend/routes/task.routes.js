@@ -1,7 +1,6 @@
   const express = require("express");
   const Task = require("../models/Task");
-  const auth = require("../middleware/auth.middleware");
-
+  const {auth} = require("../middleware/auth.middleware");
   const router = express.Router();
 
   // Get Tasks
@@ -11,7 +10,7 @@
   });
 
   // Create Task
-  router.post("/", auth, async (req, res) => {
+  router.post("/create", auth, async (req, res) => {
     const task = new Task({ ...req.body, user: req.userId });
     await task.save();
     res.json(task);

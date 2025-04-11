@@ -1,23 +1,28 @@
 const jwt = require("jsonwebtoken");
 
+// Use environment variable or fallback to hardcoded secret
+const JWT_SECRET = process.env.JWT_SECRET || "Neetu@123";
+
 const auth = (req, res, next) => {
-  // Check if Authorization header exists
-  const token = req.header("Authorization")?.split(" ")[1]; // Get token from Authorization header
+  const token = req.headers.authorization?.split(" ")[1];
 
   if (!token) {
-    return res.status(401).json({ message: "No token, authorization denied" });
+    return res.status(401).json({ msg: "Token not provided!" });
   }
 
   try {
-    // Make sure the secret used in sign and verify is the same
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || "Neetu@123"); // Use a secret from environment or default
+    const decoded = jwt.verify(token, JWT_SECRET);
 
-    // Store user ID from token in the request object
-    req.userId = decoded.id; 
-    next(); // Proceed to the next middleware or route
+    if (decoded) {
+      req.userId = decoded.id; // ✅ pass user ID to next handlers
+      console.log("Authenticated:", decoded);
+      next();
+    } else {
+      res.status(403).json({ msg: "You are not authorised!" });
+    }
   } catch (err) {
-    return res.status(400).json({ message: "Invalid Token" });
+    res.status(403).json({ msg: "Invalid token!", error: err.message });
   }
 };
 
-module.exports = auth;
+module.exports = { auth };
