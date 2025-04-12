@@ -13,7 +13,7 @@ import {
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import img from "../assets/asana.png";
 import a from "../assets/google.png";
-import { toast, Toaster } from "react-hot-toast"; // ✅ Correct import
+import { toast, Toaster } from "react-hot-toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,7 +21,17 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleLogin = async () => {
+    if (!validateEmail(email)) {
+      toast.error("Please enter a valid email address 📧");
+      return;
+    }
+
     setIsLoading(true);
     const userCredentials = { email, password };
 
@@ -52,12 +62,12 @@ const Login = () => {
 
   return (
     <Flex minH="100vh" direction="column" bg="white">
-      {/* Logo at top-left */}
+      {/* Logo */}
       <Box position="absolute" top="4" left="4">
         <Image src={img} alt="Asana Logo" boxSize="100px" objectFit="contain" />
       </Box>
 
-      {/* Centered Login Box */}
+      {/* Center Form */}
       <Flex flex="1" align="center" justify="center">
         <Box w="full" maxW="md" px={8} py={10} borderRadius="xl" bg="white">
           <Heading fontSize="3xl" mb={2} textAlign="center" color="gray.800">
@@ -67,7 +77,7 @@ const Login = () => {
             To get started, please sign in
           </Text>
 
-          {/* Google Button */}
+          {/* Google Login */}
           <Button
             w="full"
             variant="outline"
@@ -78,14 +88,14 @@ const Login = () => {
             Continue with Google
           </Button>
 
-          {/* OR Separator */}
+          {/* OR separator */}
           <Flex align="center" gap={2} my={4}>
             <Box flex="1" height="1px" bg="gray.300" />
             <Text fontSize="sm" color="gray.500">or</Text>
             <Box flex="1" height="1px" bg="gray.300" />
           </Flex>
 
-          {/* Email & Password Form */}
+          {/* Email & Password */}
           <VStack spacing={4}>
             <Text fontSize="sm" color="gray.600" mb={1} w="full">
               Login with Email and Password
@@ -97,6 +107,11 @@ const Login = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                onBlur={() => {
+                  if (email && !validateEmail(email)) {
+                    toast.error("Invalid email format ❌");
+                  }
+                }}
               />
             </Box>
             <Box w="full">
@@ -120,7 +135,7 @@ const Login = () => {
             </Button>
           </VStack>
 
-          {/* Register Link */}
+          {/* Register */}
           <Text mt={6} textAlign="center" fontSize="sm">
             New user?{" "}
             <Link as={RouterLink} to="/register" color="blue.500" fontWeight="medium">
@@ -130,8 +145,34 @@ const Login = () => {
         </Box>
       </Flex>
 
-      {/* Toast container */}
-      <Toaster position="top-center" reverseOrder={false} />
+      {/* Toast container with professional style */}
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        toastOptions={{
+          duration: 1000,
+          style: {
+            background: "#2D3748",
+            color: "#F7FAFC",
+            padding: "12px 16px",
+            borderRadius: "8px",
+            fontSize: "15px",
+            boxShadow: "0px 4px 16px rgba(0, 0, 0, 0.2)",
+          },
+          success: {
+            iconTheme: {
+              primary: "#38A169",
+              secondary: "#F7FAFC",
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: "#E53E3E",
+              secondary: "#F7FAFC",
+            },
+          },
+        }}
+      />
     </Flex>
   );
 };
