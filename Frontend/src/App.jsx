@@ -1,13 +1,7 @@
-// Demo.jsx
-import { Button, HStack } from "@chakra-ui/react";
+import Allroutes from "./Routers/AllRoutes";
 
-const App = () => {
-  return (
-    <HStack spacing={4}>
-      <Button colorScheme="black">Click me</Button>
-      <Button colorScheme="blue">Click me</Button>
-    </HStack>
-  );
-};
+function App() {
+  return <Allroutes />;
+}
 
 export default App;

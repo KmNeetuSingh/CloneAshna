@@ -4,8 +4,12 @@ const dotenv = require("dotenv");
 const authRoutes = require("./routes/auth.routes");
 const taskRoutes = require("./routes/task.routes");
 const connection = require("./config/db");
-const teamRoutes = require("./routes/team.routes")
+const teamRoutes = require("./routes/team.routes");
+
+// ✅ Load .env
 dotenv.config();
+
+// console.log("✅ Loaded JWT_SECRET in server.js:", process.env.JWT_SECRET);
 
 const app = express();
 app.use(cors());
