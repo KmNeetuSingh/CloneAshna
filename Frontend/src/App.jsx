@@ -1,11 +1,13 @@
-import React from 'react'
+// Demo.jsx
+import { Button, HStack } from "@chakra-ui/react";
 
-function App() {
+const App = () => {
   return (
-    <div>
-      Asana Frontend
-    </div>
-  )
-}
+    <HStack spacing={4}>
+      <Button colorScheme="black">Click me</Button>
+      <Button colorScheme="blue">Click me</Button>
+    </HStack>
+  );
+};
 
-export default App
+export default App;
