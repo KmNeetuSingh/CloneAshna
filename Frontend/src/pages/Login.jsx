@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import img from "../assets/asana.png";
-import googleLogo from "../assets/google.png"; // Assuming you have a Google logo image
+import googleLogo from "../assets/google.png";
 import { toast, Toaster } from "react-hot-toast";
 
 const Login = () => {
@@ -70,10 +70,22 @@ const Login = () => {
       {/* Center Form */}
       <Flex flex="1" align="center" justify="center">
         <Box w="full" maxW="md" px={8} py={10} borderRadius="xl" bg="white">
-          <Heading fontSize="3xl" mb={2} textAlign="center" color="gray.800">
+          <Heading
+            fontSize="3xl"
+            mb={2}
+            textAlign="center"
+            color="gray.800"
+            _hover={{ color: "rgb(69,115,210)" }} // Apply hover color here
+          >
             Welcome to Asana
           </Heading>
-          <Text fontSize="md" color="gray.600" mb={6} textAlign="center">
+          <Text
+            fontSize="md"
+            color="gray.600"
+            mb={6}
+            textAlign="center"
+            _hover={{ color: "rgb(69,115,210)" }} // Apply hover color here
+          >
             To get started, please sign in
           </Text>
 
@@ -91,17 +103,32 @@ const Login = () => {
           {/* OR separator */}
           <Flex align="center" gap={2} my={4}>
             <Box flex="1" height="1px" bg="gray.300" />
-            <Text fontSize="sm" color="gray.500">or</Text>
+            <Text fontSize="sm" color="gray.500" _hover={{ color: "rgb(69,115,210)" }}>
+              or
+            </Text>
             <Box flex="1" height="1px" bg="gray.300" />
           </Flex>
 
           {/* Email & Password */}
           <VStack spacing={4}>
-            <Text fontSize="sm" color="gray.600" mb={1} w="full">
+            <Text
+              fontSize="sm"
+              color="gray.600"
+              mb={1}
+              w="full"
+              _hover={{ color: "rgb(69,115,210)" }} // Apply hover color here
+            >
               Login with Email and Password
             </Text>
             <Box w="full">
-              <Text fontSize="sm" color="gray.600" mb={1}>Email address</Text>
+              <Text
+                fontSize="sm"
+                color="gray.600"
+                mb={1}
+                _hover={{ color: "rgb(69,115,210)" }} // Apply hover color here
+              >
+                Email address
+              </Text>
               <Input
                 placeholder="you@example.com"
                 type="email"
@@ -115,7 +142,14 @@ const Login = () => {
               />
             </Box>
             <Box w="full">
-              <Text fontSize="sm" color="gray.600" mb={1}>Password</Text>
+              <Text
+                fontSize="sm"
+                color="gray.600"
+                mb={1}
+                _hover={{ color: "rgb(69,115,210)" }} // Apply hover color here
+              >
+                Password
+              </Text>
               <Input
                 placeholder="Enter your password"
                 type="password"
@@ -136,7 +170,12 @@ const Login = () => {
           </VStack>
 
           {/* Register */}
-          <Text mt={6} textAlign="center" fontSize="sm">
+          <Text
+            mt={6}
+            textAlign="center"
+            fontSize="sm"
+            _hover={{ color: "rgb(69,115,210)", cursor: "pointer" }}
+          >
             New user?{" "}
             <Link as={RouterLink} to="/register" color="blue.500" fontWeight="medium">
               Register here
