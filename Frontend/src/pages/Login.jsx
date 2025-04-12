@@ -10,16 +10,16 @@ import {
   Link,
   VStack,
 } from "@chakra-ui/react";
-import { Link as RouterLink, useNavigate } from "react-router-dom"; // ✅ useNavigate instead of useHistory
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import img from "../assets/asana.png";
 import a from "../assets/google.png";
-import { toaster, Toaster } from "../components/ui/toaster"; // Import toaster and Toaster component
+import { toast, Toaster } from "react-hot-toast"; // ✅ Correct import
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate(); // ✅ Correct hook
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     setIsLoading(true);
@@ -37,35 +37,14 @@ const Login = () => {
       const data = await res.json();
 
       if (res.ok) {
-        // Use toaster to show a success message
-        toaster({
-          title: "Login successful",
-          description: "You have logged in successfully.",
-          type: "success",
-          duration: 3000,
-          isClosable: true,
-        });
+        toast.success("Login successful ✅");
         localStorage.setItem("token", data.token);
-        navigate("/dashboard"); // ✅ Correct method to redirect
+        navigate("/dashboard");
       } else {
-        // Use toaster to show an error message
-        toaster({
-          title: "Login failed",
-          description: data.message || "Please check your credentials.",
-          type: "error",
-          duration: 3000,
-          isClosable: true,
-        });
+        toast.error(data.message || "Login failed. Please check your credentials ❌");
       }
     } catch (err) {
-      // Use toaster to show an error message
-      toaster({
-        title: "Error",
-        description: "An error occurred while logging in.",
-        type: "error",
-        duration: 3000,
-        isClosable: true,
-      });
+      toast.error("An error occurred while logging in.");
     } finally {
       setIsLoading(false);
     }
@@ -99,24 +78,20 @@ const Login = () => {
             Continue with Google
           </Button>
 
-          {/* Custom OR separator */}
+          {/* OR Separator */}
           <Flex align="center" gap={2} my={4}>
             <Box flex="1" height="1px" bg="gray.300" />
-            <Text fontSize="sm" color="gray.500">
-              or
-            </Text>
+            <Text fontSize="sm" color="gray.500">or</Text>
             <Box flex="1" height="1px" bg="gray.300" />
           </Flex>
 
-          {/* Email & Password Login */}
+          {/* Email & Password Form */}
           <VStack spacing={4}>
             <Text fontSize="sm" color="gray.600" mb={1} w="full">
               Login with Email and Password
             </Text>
             <Box w="full">
-              <Text fontSize="sm" color="gray.600" mb={1}>
-                Email address
-              </Text>
+              <Text fontSize="sm" color="gray.600" mb={1}>Email address</Text>
               <Input
                 placeholder="you@example.com"
                 type="email"
@@ -125,9 +100,7 @@ const Login = () => {
               />
             </Box>
             <Box w="full">
-              <Text fontSize="sm" color="gray.600" mb={1}>
-                Password
-              </Text>
+              <Text fontSize="sm" color="gray.600" mb={1}>Password</Text>
               <Input
                 placeholder="Enter your password"
                 type="password"
@@ -150,20 +123,15 @@ const Login = () => {
           {/* Register Link */}
           <Text mt={6} textAlign="center" fontSize="sm">
             New user?{" "}
-            <Link
-              as={RouterLink}
-              to="/register"
-              color="blue.500"
-              fontWeight="medium"
-            >
+            <Link as={RouterLink} to="/register" color="blue.500" fontWeight="medium">
               Register here
             </Link>
           </Text>
         </Box>
       </Flex>
 
-      {/* Render the Toaster component here to show the toasts */}
-      <Toaster />
+      {/* Toast container */}
+      <Toaster position="top-center" reverseOrder={false} />
     </Flex>
   );
 };
