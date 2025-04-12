@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import img from "../assets/asana.png";
-import a from "../assets/google.png";
+import googleLogo from "../assets/google.png"; // Assuming you have a Google logo image
 import { toast, Toaster } from "react-hot-toast";
 
 const Login = () => {
@@ -83,7 +83,7 @@ const Login = () => {
             variant="outline"
             borderColor="gray.300"
             mb={4}
-            leftIcon={<Image src={a} alt="Google" boxSize="20px" />}
+            leftIcon={<Image src={googleLogo} alt="Google" boxSize="20px" />}
           >
             Continue with Google
           </Button>
