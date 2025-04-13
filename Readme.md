@@ -32,8 +32,8 @@ Every great team needs a great tool. I created **Ashan** to learn, build, and sh
 
 ## 🌐 Live Project
 
-- **Frontend**: [https://your-frontend-url.vercel.app](https://your-frontend-url.vercel.app)  
-- **Backend**: [https://your-backend-url.onrender.com](https://your-backend-url.onrender.com)
+- **Frontend**: [https://clone-ashna.vercel.app/](https://clone-ashna.vercel.app/)  
+- **Backend**: [https://cloneashna.onrender.com](https://cloneashna.onrender.com)
 
 > 💤 Free-tier backend might take 15–30 seconds to wake up.
 
