@@ -1,164 +1,93 @@
-# ✨ Asana – Where Teams Get Work Done
+# 🌟 Asana Clone – Frontend
 
-**Ashan** is a full-stack task & team management app built to power productive workflows and transparent collaboration.
-
-Whether you're managing personal tasks or leading a team, Ashan gives you the clarity and tools to get things done — fast, secure, and beautifully.
+A modern and responsive frontend application for task and team management, built using **React.js** and **Chakra UI**. This app connects to a secure backend API to enable user registration, login, task creation, and team collaboration.
 
 ---
 
-## 🎯 Why I Built This
+## 🚀 Tech Stack
 
-Every great team needs a great tool. I created **Ashan** to learn, build, and ship something close to what teams like Asana and Trello offer — but from the ground up, solo. This project is my take on how modern SaaS tools should feel: clean, fast, and focused on what matters.
-
----
-
-## 🔧 Tech Stack
-
-**Frontend**
-- React (Hooks + Router)
-- Chakra UI
-- Axios
-- Vercel for deployment
-
-**Backend**
-- Node.js + Express.js
-- MongoDB + Mongoose
-- JWT for Auth
-- bcrypt for security
-- dotenv for env config
-- Render for hosting
+- **React.js** – Component-based UI library
+- **Chakra UI (v2+)** – Modern UI toolkit for styling
+- **Axios** – Promise-based HTTP client for API calls
+- **React Router DOM** – Client-side routing
+- **.env** – Environment variable configuration
+- **Vercel** – Deployment platform for frontend
 
 ---
 
-## 🌐 Live Project
+## 🔧 Getting Started
 
-- **Frontend**: [https://your-frontend-url.vercel.app](https://your-frontend-url.vercel.app)  
-- **Backend**: [https://your-backend-url.onrender.com](https://your-backend-url.onrender.com)
-
-> 💤 Free-tier backend might take 15–30 seconds to wake up.
-
----
-
-## 📂 Folder Structure
-
-```
-CloneAshna/
-├── Backend/
-│   ├── config/
-│   ├── middleware/
-│   ├── models/
-│   ├── routes/
-│   └── server.js
-│
-├── Frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── api/
-│   │   ├── assets/
-│   │   ├── components/
-│   │   ├── Navbar/
-│   │   ├── pages/
-│   │   ├── Routers/
-│   │   ├── App.jsx
-│   │   ├── main.jsx
-```
-
----
-
-## 🔐 Key Features
-
-### Auth
-- Register / Login
-- Encrypted passwords with `bcrypt`
-- Secure JWT-based sessions
-- Protected routes on both ends
-
-### Tasks
-- Add, edit, delete tasks
-- Filter by priority, status, and due date
-- Organize work visually and logically
-
-### Teams
-- Create & join teams
-- Assign tasks to team members
-- Collaborative task management
-
----
-
-## 🚀 Getting Started (Local Setup)
-
-### 1. Clone the Repos
+### 1. Clone the Repository
 
 ```bash
-git clone <frontend-repo-url>
-cd frontend
-npm install
+git clone <your-frontend-repo-url>
+cd <project-folder>
+```
 
-git clone <backend-repo-url>
-cd backend
+### 2. Install Dependencies
+
+```bash
 npm install
 ```
 
-### 2. Setup Environment Variables
+### 3. Environment Variables
 
-**Frontend (.env)**
-
-```
-REACT_APP_BASE_URL=https://your-backend-url.onrender.com
-```
-
-**Backend (.env)**
+Create a `.env` file in the root and add your backend base URL:
 
 ```
-PORT=5000
-MONGO_URI=<your_mongo_uri>
-JWT_SECRET=<your_jwt_secret>
+REACT_APP_BASE_URL=https://your-backend-api.onrender.com
 ```
 
-### 3. Run the App
+### 4. Start the Application
 
 ```bash
-# Backend
-cd backend
-node server.js
-
-# Frontend
-cd frontend
 npm start
 ```
 
----
-
-## 🔌 API Endpoints
-
-All secured routes require `Authorization: Bearer <token>`
-
-**Auth**
-- `POST /auth/register`
-- `POST /auth/login`
-- `GET /auth/profile`
-
-**Tasks**
-- `GET /tasks`
-- `POST /tasks/create`
-- `PUT /tasks/:id`
-- `DELETE /tasks/:id`
-
-**Teams**
-- `POST /teams`
-- `POST /teams/:id/add-member`
+The app will run locally on:  
+👉 `http://localhost:3000`
 
 ---
 
-## 🌱 Roadmap
+## 🌐 Deployment
 
-- [ ] Email-based team invites  
-- [ ] PWA support   
-- [ ] Task calendar view
-## 🙌 Let’s Connect
+> ✅ Deployed on [Vercel](https://vercel.com/)  
+> ⚠️ Initial API responses may take a few seconds due to backend cold-start on Render.
 
-I'm actively exploring opportunities and open to collaboration.
+---
 
-📬 [Your LinkedIn](https://your-linkedin-profile)  
-💻 Drop an Issue or Star the Repo
+## 🔗 Features
 
+- 🔐 User registration and login (JWT-based)
+- 🧠 Task creation, editing, and filtering
+- 👥 Team creation and member management
+- 🧭 Smooth navigation using React Router
+- 💅 Fully responsive UI using Chakra UI
+- 📡 Integrated with secure backend API
+
+---
+
+## 📁 Folder Structure
+
+```
+├── src
+│   ├── components      // Reusable UI components
+│   ├── pages           // Route-level pages
+│   ├── context         // Auth or state context
+│   ├── utils           // Axios configs or helper files
+│   └── App.jsx         // Main app component
+```
+
+---
+
+## 🛠️ API Integration
+
+All API requests are handled using **Axios**. Endpoints connect with the backend hosted on Render. JWT tokens are stored securely (localStorage/sessionStorage) and sent with requests to protected routes.
+
+---
+
+## 📌 Notes
+
+- Ensure the backend server is running before frontend API calls.
+- For production, update the `.env` variable to use the correct backend deployment URL.
+- Chakra UI is fully customizable – feel free to extend its theme.
