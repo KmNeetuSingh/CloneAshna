@@ -14,6 +14,7 @@ import { Toaster, toast } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { motion } from "framer-motion";
 import image from "../assets/asana.png";
+import { registerUser } from "../api/api"; // ✅ import from centralized API module
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -51,21 +52,13 @@ const Register = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
-      });
-
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.message || "Registration failed.");
-      }
+      // ✅ Use Axios API function
+      await registerUser({ username, email, password });
 
       toast.success("Registration successful! Redirecting...");
-      setTimeout(() => navigate("/"), 1000);
+      setTimeout(() => navigate("/tasks"), 1000);
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response?.data?.message || "Registration failed.");
     }
   };
 
@@ -87,11 +80,7 @@ const Register = () => {
         <Box maxW="md" mx="auto" textAlign="center">
           <Image src={image} alt="Asana Logo" mx="auto" mb={4} />
 
-          <Heading
-            size="lg"
-            mb={6}
-            _hover={{ color: "rgb(104,0,49)" }}
-          >
+          <Heading size="lg" mb={6} _hover={{ color: "rgb(104,0,49)" }}>
             Start coordinating your work with Asana
           </Heading>
 
@@ -179,11 +168,21 @@ const Register = () => {
             _hover={{ color: "rgb(104,0,49)", cursor: "pointer" }}
           >
             By signing up, I agree to the Asana{" "}
-            <Text as="span" display="inline" color="blue.500" _hover={{ color: "rgb(104,0,49)" }}>
+            <Text
+              as="span"
+              display="inline"
+              color="blue.500"
+              _hover={{ color: "rgb(104,0,49)" }}
+            >
               Privacy Policy
             </Text>{" "}
             and{" "}
-            <Text as="span" display="inline" color="blue.500" _hover={{ color: "rgb(104,0,49)" }}>
+            <Text
+              as="span"
+              display="inline"
+              color="blue.500"
+              _hover={{ color: "rgb(104,0,49)" }}
+            >
               Terms of Service
             </Text>
             .

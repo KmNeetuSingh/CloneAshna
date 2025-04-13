@@ -2,40 +2,31 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.model");
+const { auth } = require("../middleware/auth.middleware"); // ✅ move this up
 require("dotenv").config();
-
 
 const router = express.Router();
 
 const JWT_SECRET = process.env.JWT_SECRET;
-// console.log("JWT_SECRET is:", JWT_SECRET); 
-
-
 
 // ✅ Register
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
-    // Check if user already exists with the same email or username
     const existingUser = await User.findOne({ $or: [{ email }, { username }] });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists with this email or username" });
     }
 
-    // Check if the username is valid (not empty or null)
     if (!username || username.trim() === "") {
       return res.status(400).json({ message: "Username cannot be empty" });
     }
 
-    // Hash the password
     const hash = await bcrypt.hash(password, 10);
-
-    // Create and save the new user
     const user = new User({ username, email, password: hash });
     await user.save();
 
-    // Create a JWT token
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "6h" });
 
     res.status(201).json({
@@ -66,6 +57,18 @@ router.post("/login", async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ message: "Login failed", error: err.message });
+  }
+});
+
+// ✅ Profile
+router.get("/profile", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select("username email");
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.json({ username: user.username, email: user.email });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch profile", error: err.message });
   }
 });
 

@@ -10,12 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ark-ui/react": "^5.5.0",
     "@chakra-ui/icons": "^2.2.4",
-    "@chakra-ui/menu": "^2.2.1",
-    "@chakra-ui/react": "^3.15.1",
+    "@chakra-ui/react": "^3.0.0-next.32",
+    "@chakra-ui/system": "^2.0.0-next.4",
+    "@chakra-ui/theme": "^3.4.6",
+    "@chakra-ui/theme-tools": "^2.2.6",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "axios": "^1.8.4",
+    "dotenv": "^16.5.0",
     "framer-motion": "^12.6.5",
     "next-themes": "^0.4.6",
     "react": "^19.0.0",

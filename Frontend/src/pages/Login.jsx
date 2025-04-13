@@ -14,9 +14,10 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import img from "../assets/asana.png";
 import googleLogo from "../assets/google.png";
 import { toast, Toaster } from "react-hot-toast";
-import { motion } from "framer-motion"; // ✅ Animation library
+import { motion } from "framer-motion";
+import { loginUser } from "../api/api"; // ✅ Import login function
 
-const MotionBox = motion(Box); // ✅ Motion-enhanced Box
+const MotionBox = motion.create(Box);
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -36,28 +37,17 @@ const Login = () => {
     }
 
     setIsLoading(true);
-    const userCredentials = { email, password };
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userCredentials),
-      });
+      const res = await loginUser({ email, password }); // ✅ Using the Axios call
+      toast.success("Login successful ✅");
 
-      const data = await res.json();
-
-      if (res.ok) {
-        toast.success("Login successful ✅");
-        localStorage.setItem("token", data.token);
-        navigate("/dashboard");
-      } else {
-        toast.error(data.message || "Login failed. Please check your credentials ❌");
-      }
+      localStorage.setItem("token", res.data.token);
+      navigate("/tasks");
     } catch (err) {
-      toast.error("An error occurred while logging in.");
+      const errorMsg =
+        err.response?.data?.message || "Login failed. Please check your credentials ❌";
+      toast.error(errorMsg);
     } finally {
       setIsLoading(false);
     }
