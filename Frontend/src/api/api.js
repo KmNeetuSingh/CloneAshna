@@ -35,10 +35,10 @@ export const deleteTask = (id) =>
 // 🔹 AUTH APIs
 //
 export const loginUser = (credentials) =>
-  axios.post(`${API}/auth/login`, credentials);
+  axios.post(`${API}/api/auth/login`, credentials);
 
 export const registerUser = (userData) =>
-  axios.post(`${API}/auth/register`, userData);
+  axios.post(`${API}/api/auth/register`, userData);
 
 export const getProfile = () =>
-  axios.get(`${API}/auth/profile`, authHeader());
+  axios.get(`${API}/api/auth/profile`, authHeader());
