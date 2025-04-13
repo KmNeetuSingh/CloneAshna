@@ -14,6 +14,9 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import img from "../assets/asana.png";
 import googleLogo from "../assets/google.png";
 import { toast, Toaster } from "react-hot-toast";
+import { motion } from "framer-motion"; // ✅ Animation library
+
+const MotionBox = motion(Box); // ✅ Motion-enhanced Box
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -69,13 +72,23 @@ const Login = () => {
 
       {/* Center Form */}
       <Flex flex="1" align="center" justify="center">
-        <Box w="full" maxW="md" px={8} py={10} borderRadius="xl" bg="white">
+        <MotionBox
+          w="full"
+          maxW="md"
+          px={8}
+          py={10}
+          borderRadius="xl"
+          bg="white"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <Heading
             fontSize="3xl"
             mb={2}
             textAlign="center"
             color="gray.800"
-            _hover={{ color: "rgb(69,115,210)" }} // Apply hover color here
+            _hover={{ color: "rgb(104,0,49)" }}
           >
             Welcome to Asana
           </Heading>
@@ -84,7 +97,7 @@ const Login = () => {
             color="gray.600"
             mb={6}
             textAlign="center"
-            _hover={{ color: "rgb(69,115,210)" }} // Apply hover color here
+            _hover={{ color: "rgb(104,0,49)" }}
           >
             To get started, please sign in
           </Text>
@@ -103,7 +116,11 @@ const Login = () => {
           {/* OR separator */}
           <Flex align="center" gap={2} my={4}>
             <Box flex="1" height="1px" bg="gray.300" />
-            <Text fontSize="sm" color="gray.500" _hover={{ color: "rgb(69,115,210)" }}>
+            <Text
+              fontSize="sm"
+              color="gray.500"
+              _hover={{ color: "rgb(104,0,49)" }}
+            >
               or
             </Text>
             <Box flex="1" height="1px" bg="gray.300" />
@@ -116,7 +133,7 @@ const Login = () => {
               color="gray.600"
               mb={1}
               w="full"
-              _hover={{ color: "rgb(69,115,210)" }} // Apply hover color here
+              _hover={{ color: "rgb(104,0,49)" }}
             >
               Login with Email and Password
             </Text>
@@ -125,7 +142,7 @@ const Login = () => {
                 fontSize="sm"
                 color="gray.600"
                 mb={1}
-                _hover={{ color: "rgb(69,115,210)" }} // Apply hover color here
+                _hover={{ color: "rgb(104,0,49)" }}
               >
                 Email address
               </Text>
@@ -146,7 +163,7 @@ const Login = () => {
                 fontSize="sm"
                 color="gray.600"
                 mb={1}
-                _hover={{ color: "rgb(69,115,210)" }} // Apply hover color here
+                _hover={{ color: "rgb(104,0,49)" }}
               >
                 Password
               </Text>
@@ -164,6 +181,7 @@ const Login = () => {
               w="full"
               isLoading={isLoading}
               onClick={handleLogin}
+              _hover={{ bg: "rgb(104,0,49)" }}
             >
               Login
             </Button>
@@ -174,17 +192,23 @@ const Login = () => {
             mt={6}
             textAlign="center"
             fontSize="sm"
-            _hover={{ color: "rgb(69,115,210)", cursor: "pointer" }}
+            _hover={{ color: "rgb(104,0,49)", cursor: "pointer" }}
           >
             New user?{" "}
-            <Link as={RouterLink} to="/register" color="blue.500" fontWeight="medium">
+            <Link
+              as={RouterLink}
+              to="/register"
+              color="blue.500"
+              fontWeight="medium"
+              _hover={{ color: "rgb(104,0,49)" }}
+            >
               Register here
             </Link>
           </Text>
-        </Box>
+        </MotionBox>
       </Flex>
 
-      {/* Toast container with professional style */}
+      {/* Toast container */}
       <Toaster
         position="top-center"
         reverseOrder={false}

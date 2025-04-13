@@ -1,11 +1,12 @@
-import React from 'react'
+// src/pages/Dashboard.jsx
+import { Box } from "@chakra-ui/react";
+import Navbar from "../Navbar/Navbar"; // or wherever your Navbar (Header) is
 
-function Dashboard() {
+export default function Dashboard() {
   return (
-    <div color = "black" fontSize = "30px" fontWeight = "bold" textAlign = "center" marginTop = "20px">
-      Its a dashboard
-    </div>
-  )
+    <Box textAlign="center" mt="20px">
+      <Navbar />
+      Hello, Dashboard!
+    </Box>
+  );
 }
-
-export default Dashboard 
